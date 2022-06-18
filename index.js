@@ -5,7 +5,7 @@ app.use(express.json())
 app.use(express.static('build'))
 morgan.token('body', (req) => req.method === 'POST' ? JSON.stringify(req.body) : '')
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
-
+require('dotenv').config()
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -96,7 +96,7 @@ app.post('/api/persons', (request, response) => {
     response.json(person)
 })
 
-const PORT = 3001
+const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
